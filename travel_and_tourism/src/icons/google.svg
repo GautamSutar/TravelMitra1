@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512">
+  <!-- Background Circle -->
+  <circle cx="256" cy="256" r="256" fill="#121212" />
+  
+  <!-- Letter T -->
+  <text x="120" y="270" font-family="'Product Sans', sans-serif" font-size="200" font-weight="bold" fill="#FFFFFF">
+    T
+  </text>
+
+  <!-- Letter M -->
+  <text x="260" y="270" font-family="'Product Sans', sans-serif" font-size="200" font-weight="bold" fill="#FFFFFF">
+    M
+  </text>
+
+  <!-- Glow Effect -->
+  <text x="120" y="270" font-family="'Product Sans', sans-serif" font-size="200" font-weight="bold" fill="none" stroke="#00FF00" stroke-width="10" opacity="0.6">
+    T
+  </text>
+  <text x="260" y="270" font-family="'Product Sans', sans-serif" font-size="200" font-weight="bold" fill="none" stroke="#00FF00" stroke-width="10" opacity="0.6">
+    M
+  </text>
+</svg>
