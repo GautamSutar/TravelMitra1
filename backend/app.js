@@ -105,6 +105,19 @@ const app = express();
 // Port 
 const PORT = process.env.PORT || 5000;
 
+
+
+app.use(cors(
+    {
+        origin: 'https://stalwart-mooncake-94d96c.netlify.app/',
+        methods: ['GET', 'POST'],
+        credentials: true,
+    }
+));
+
+
+
+
 // Middleware
 app.use(cors());
 app.use(express.json());
