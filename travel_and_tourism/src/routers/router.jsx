@@ -15,6 +15,7 @@ import AboutPage from "../pages/about/AboutPage";
 import Festival from "../pages/fest/Festival";
 import Hotels from "../pages/Hotels";
 import Booking from "../pages/Booking";
+import CalendarView from "../pages/calender/CalendarView";
 
 
 const router = createBrowserRouter([
@@ -37,6 +38,7 @@ const router = createBrowserRouter([
             { path: "/fest", element: <Festival /> },
             { path: "/hotel", element: <Hotels /> },
             { path: "/booking/:hotelId", element: <Booking /> },
+            { path: "/calendar", element: <CalendarView /> },
         ],
     },
 ]);

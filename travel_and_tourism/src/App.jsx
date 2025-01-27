@@ -16,7 +16,9 @@ function App() {
   const location = useLocation();
   const footerRef = useRef(null);
   const hideNavFooter = ['/signup', '/login'].includes(location.pathname);
-  const hideComponents = ['/login', '/signup', '/category', '/planedtrip', '/travel-mitra-trips', '/events', '/iconic', '/hidden', '/details', '/fact', '/about', '/fest', '/hotel', '/hotel','/booking/:hotelId'].includes(location.pathname);
+  const hideComponents = ['/login', '/signup', '/category', '/planedtrip', '/travel-mitra-trips',
+    '/events', '/iconic', '/hidden', '/details', '/fact', '/about',
+    '/fest', '/hotel', '/hotel', '/booking/:hotelId', '/calendar'].includes(location.pathname);
 
   const scrollToFooter = () => {
     if (footerRef.current) {

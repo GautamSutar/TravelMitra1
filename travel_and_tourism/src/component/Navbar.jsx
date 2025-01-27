@@ -123,38 +123,44 @@ function Navbar() {
                 <div className="hidden md:flex space-x-4">
                     <Link
                         to="/"
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-blue-800"
                     >
                         Home
                     </Link>
                     <Link
                         to="/about"
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-red-800"
                     >
                         About
                     </Link>
                     <Link
+                        to="/events"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-blue-800"
+                    >
+                        Event
+                    </Link>
+                    <Link
                         to="/hotel"
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-red-800"
                     >
                     Book Your Hotel
                     </Link>
                     <Link
                         to="#"
                         onClick={handleScrollToFooter}
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-blue-800"
                     >
                         Contact
                     </Link>
                     <Link
                         to="/category"
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-red-800"
                     >
                         Category
                     </Link>
                     <Link
                         to="/planedtrip"
-                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-gray-800"
+                        className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-blue-800"
                     >
                         Your Trips
                     </Link>

@@ -8,14 +8,15 @@ const CreateEvent = async (req, res) => {
         const newEvent = new Events({
             name: req.body.name,
             type: req.body.type,
+            organiserInformation: req.body.organiserInformation,
             time: req.body.time,
+            description: req.body.description,
             date: req.body.date,
             ticket_price: req.body.ticket_price,
-            registration_link: req.body.registration_link,
             image_url: req.body.image_url,
+            rating: req.body.rating,
             address: address
         });
-
         await newEvent.save();
         res.status(201).json({ message: 'Event added successfully', event: newEvent });
     } catch (error) {
