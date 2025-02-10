@@ -115,7 +115,7 @@ router.post('/ceateFetival', createFestival);
 router.get('/getFestival', getFestivals)
 
 // Hotel 
-router.get('/getdata', getHotels);
+        router.get('/getHotel', authenticateUser, getHotels);
 
 
 

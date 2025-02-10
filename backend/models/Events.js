@@ -15,10 +15,6 @@ const eventSchema = new mongoose.Schema({
         enum: ['cultural', 'adventure', 'food', 'drink', 'workshops'],
         required: true,
     },
-    organiserInformation: {
-        type: String,
-        required: true
-    },
     time: {
         type: String,
         required: true
@@ -27,11 +23,11 @@ const eventSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    date: {
+    start: {
         type: String,
         required: true
     },
-    endDate: {
+    end: {
         type: String,
         required: true
     },
@@ -53,7 +49,10 @@ const eventSchema = new mongoose.Schema({
         max: 5,
         required: true
     },
-
+    registration_link: {
+        type: String,
+        required: false
+    },
     address: {
         type: String,
         required: false // Address is now optional

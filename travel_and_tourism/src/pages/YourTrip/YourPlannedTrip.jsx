@@ -1,7 +1,6 @@
-// src/YourPlannedTrip/YourPlannedTrip.jsx
-
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { motion } from 'framer-motion';
 import BudgetForm from '../category/BudgetForm';
 import TripSummary from './TripSummary';
 import TripList from './TripList';
@@ -53,11 +52,60 @@ const YourPlannedTrip = () => {
     }, []);
 
     return (
-        <div className="p-4 sm:p-6">
-            <BudgetForm onSubmit={handleBudgetSubmit} error={error} />
-            <TripSummary budget={budget} totalPrice={totalPrice} saving={saving} error={error} />
-            <TripList tripData={tripData} loading={loading} onRemove={handleRemove} />
-        </div>
+        <motion.div
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="p-4 sm:p-6"
+        >
+            {/* Budget Form */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: -30 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+            >
+                <BudgetForm onSubmit={handleBudgetSubmit} error={error} />
+            </motion.div>
+
+            {/* Summary */}
+            <motion.div
+                initial={{ opacity: 0, scale: 0.8, x: 30 }}
+                animate={{ opacity: 1, scale: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+            >
+                <TripSummary budget={budget} totalPrice={totalPrice} saving={saving} error={error} />
+            </motion.div>
+
+            {/* Trip List */}
+            <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={{
+                    hidden: { opacity: 0, y: 20 },
+                    visible: {
+                        opacity: 1,
+                        y: 0,
+                        transition: {
+                            staggerChildren: 0.15,
+                        },
+                    },
+                }}
+                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mt-4"
+            >
+                {tripData.map((trip, index) => (
+                    <motion.div
+                        key={trip.id}
+                        variants={{
+                            hidden: { opacity: 0, scale: 0.8, x: (index % 2 === 0) ? -20 : 20 },
+                            visible: { opacity: 1, scale: 1, x: 0 },
+                        }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <TripList tripData={[trip]} loading={loading} onRemove={handleRemove} />
+                    </motion.div>
+                ))}
+            </motion.div>
+        </motion.div>
     );
 };
 

@@ -85,7 +85,7 @@ function Navbar() {
 
     const handleLogout = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/pic/logout`, {}, {
+            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/logout`, {}, {
                 headers: {
                     Authorization: `Bearer ${token}`,
                 },

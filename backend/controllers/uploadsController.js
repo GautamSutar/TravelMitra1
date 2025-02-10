@@ -34,6 +34,7 @@ const getUserProfile = async (req, res) => {
         // console.log(user.profilePicture);
         res.status(200).json({ profilePicture: user.profilePicture.replace(/\\/g, '/') });
     } catch (error) {
+        console.log("🔴 Error in file uploadsControllers of getuserProfileCode: ", error)
         console.error('Error fetching user profile:', error);
         res.status(500).json({ error: 'Error fetching user profile.' });
     }

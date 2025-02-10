@@ -14,7 +14,24 @@ const Hotels = () => {
   useEffect(() => {
     const fetchHotels = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/hotels/getdata`);
+        // Retrieve the token from sessionStorage, since that's where you said you store it
+        const token = sessionStorage.getItem('token'); // Get the token from the session storage
+        console.log("🟢 Token Retrieved from Session Storage:", token); // Debugging log
+        // Proper string interpolation for Authorization header
+
+        if (!token) {
+          console.error("🔴 No Token Found in Session Storage");
+          return;
+        }
+        
+        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/hotel/getHotel`, {
+          headers: {
+            Authorization: `Bearer ${token}`, // ✅ Correct syntax
+            "Content-Type": "application/json",
+          },
+        });
+        
+        console.log("Hotels Data Fetched Successfully:", response.data);
         setHotels(response.data);
         setFilteredHotels(response.data);
         triggerAnimation(); // Trigger animation on initial load
@@ -53,7 +70,7 @@ const Hotels = () => {
   };
 
   // Handle Search
-  const handleSearch = (query) => {
+  const handleSearch = (query) => { 
     setSearchQuery(query);
 
     const searchResults = hotels.filter((hotel) => {
@@ -136,7 +153,7 @@ const Hotels = () => {
       </div>
 
       {/* Hotels Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
         {filteredHotels.map((hotel, index) => (
           <div
             key={hotel._id}

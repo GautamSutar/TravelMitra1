@@ -2,9 +2,7 @@ const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const Hotel = require('./models/Hotel');
 const hotels = require('./data/hotels.json');
-
 dotenv.config();
-
 const populateDatabase = async () => {
   try {
       await mongoose.connect(process.env.MONGODB_URI, {

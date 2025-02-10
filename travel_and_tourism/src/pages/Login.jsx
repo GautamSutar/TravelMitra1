@@ -21,9 +21,15 @@ const Login = () => {
       });
 
       // Store JWT token in session storage
-      const token = response.data.token;
-      sessionStorage.setItem('token', token);
-
+      const token = response.data.accessToken;
+      console.log("The Access Token is : ", token) // debuging 
+      if (!token) {
+        console.log("🔴 No Token Received from Backend");
+        return;
+      }
+      // console("The Access Token is : ",token) // debuging 
+      sessionStorage.setItem('token', token); // store in session storage 
+      
       Swal.fire({
         icon: 'success',
         title: 'Login Successful',
@@ -42,6 +48,7 @@ const Login = () => {
         confirmButtonText: 'Retry',
         confirmButtonColor: '#FF5733',
       });
+      console.log("Error in login: ",err);
       setMessage('');
     }
   };

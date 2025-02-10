@@ -8,10 +8,11 @@ const CreateEvent = async (req, res) => {
         const newEvent = new Events({
             name: req.body.name,
             type: req.body.type,
-            organiserInformation: req.body.organiserInformation,
             time: req.body.time,
+            category: req.body.category,
             description: req.body.description,
-            date: req.body.date,
+            start: req.body.start,
+            end: req.body.end,
             ticket_price: req.body.ticket_price,
             image_url: req.body.image_url,
             rating: req.body.rating,

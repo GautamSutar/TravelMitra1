@@ -4,7 +4,7 @@ const User = require('../models/User');
 const nodemailer = require('nodemailer');
 const bcrypt = require('bcryptjs');
 const jwt = require("jsonwebtoken");
-
+const Token = require("../models/Token");
 
 
 //otp generate 
@@ -124,40 +124,86 @@ const verifyOtp = async (req, res) => {
 
 
 
-//****************loginuser*******************
+//****************login user*******************
+
+const generateTokens = (user) => {
+    const accessToken = jwt.sign({ id: user._id, email: user.email, name: user.name, }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" }); // Short-lived
+    const refreshToken = jwt.sign({ id: user._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: "7d" }); // Long-lived
+
+    return { accessToken, refreshToken };
+};
+
 
 const loginUser = async (req, res) => {
-    const { email, password } = req.body;
-
     try {
+        const { email, password } = req.body;
+
         // Find the user by email
         const user = await User.findOne({ email });
         if (!user) {
-            return res.status(401).json({ message: 'Invalid email or password.' });
-        }
+            return res.status(401).json({ message: "Invalid Credentials." });
+        }   
 
         // Verify password
         const isMatch = await bcrypt.compare(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ message: 'Invalid email or password.' });
+            return res.status(401).json({ message: "Invalid email or password." });
         }
 
-        // Create a token with user ID and name
-        const token = jwt.sign(
-            { _id: user._id, name: user.name },   // Include both ID and username in the token
-            process.env.JWT_SECRET,
-            { expiresIn: '30d' }  // Token expires in 30 days
+        const { accessToken, refreshToken } = generateTokens(user);
+        // 🔍 Debugging: Check if tokens are created
+        console.log("🟡 Generated Access Token:", accessToken);
+        console.log("🟡 Generated Refresh Token:", refreshToken);
+
+        if (!accessToken || !refreshToken) {
+            return res.status(500).json({ message: "Token generation failed" });
+        }
+       
+        // 🔥 Store refreshToken in DB
+        const savedToken = await Token.findOneAndUpdate(
+            { userId: user._id },
+            { refreshToken },
+            { upsert: true, new: true }
         );
 
-        console.log(token);
+        console.log("Stored Refresh Token in DB:", savedToken?.refreshToken);
 
-        res.status(200).json({ message: 'Login successful!', token });
+        res.json({ accessToken, refreshToken });
 
     } catch (error) {
         console.error("Login Error:", error);
-        res.status(500).json({ error: 'Error logging in.' });
+        res.status(500).json({ message: error.message, error: "Error logging in." });
     }
 };
+
+
+// Refresh access token 
+const refreshToken = async (req, res) => {
+    try {
+        const { refreshToken } = req.body;
+        if (!refreshToken) {
+            return res.status(403).json({ message: "No Refresh Token Provided" });
+        }
+        const storedToken = await Token.findOne({ refreshToken });
+        if (!storedToken) {
+            return res.status(403).json({ message: "No Refresh Token " });
+        }
+        jwt.verify(refreshToken, process.env.REFRESH_TOKEN_SECRET, (err, decoded) => {
+            if (err) {
+                return res.status(403).json({ message: " Invalid refresh token" });
+            }
+            const accessToken = jwt.sign({ id: decoded.id }, process.env.ACCESS_TOKEN_SECRET, { expiresIn: "1d" });
+            res.json({ message: "Access Token ", accessToken });
+        });
+    } catch (error) {
+        console.log("Error in accessing the token: ", accessToken);
+        res.status(500).json({ message: "error.message" });
+    }
+};
+
+
+
+
 
 //  *********** get all user ************** 
 
@@ -173,4 +219,4 @@ const allUser = async (req, res) => {
 
 
 
-module.exports = { registerUser, verifyOtp, loginUser, allUser };
+module.exports = { registerUser, loginUser, verifyOtp, allUser, refreshToken };

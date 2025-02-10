@@ -34,7 +34,7 @@ const TripItem = ({ market, onRemove }) => (
                 <p className="mt-2">
                     <strong>WebUrl:</strong>
                     <Link to="#" onClick={() => window.open(market.webUrl, '_blank')} className="text-blue-500 hover:underline">
-                        {market.webUrl.length > 10 ? `${market.webUrl.slice(0, 10)}...${market.webUrl.slice(-13)}` : market.webUrl}
+                        {market.webUrl.length > 10 ? `${market.webUrl.slice(0, 4)}...${market.webUrl.slice(-10)}` : market.webUrl}
                     </Link>
                 </p>
             )}
