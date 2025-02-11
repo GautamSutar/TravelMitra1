@@ -281,7 +281,7 @@ return (
 
         {/* Booking Buttons */}
         <div className="items-center flex justify-center">
-          <FetchBookingDetails userId = {user.id} />
+         
           <button
             type="submit"
             // onClick={handleNext}

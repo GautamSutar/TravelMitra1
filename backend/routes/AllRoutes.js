@@ -13,5 +13,6 @@ router.use('/hidden-gems', require('./hiddenGemsRoutes'));
 router.use('/fest', require('./festivalRoutes'));
 router.use('/hotel', require('./hotelRoutes'));
 router.use('/hotel-book', require('./hotelBooking'));
+router.use("/hotel-details", require("./hotelDetails"));
 
 module.exports = router;
