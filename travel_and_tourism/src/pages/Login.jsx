@@ -39,7 +39,7 @@ const Login = () => {
       });
 
       setError('');
-      navigate('/');
+      navigate('/home');
     } catch (err) {
       Swal.fire({
         icon: 'error',

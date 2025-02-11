@@ -122,7 +122,7 @@ function Navbar() {
                 {/* Desktop Navigation */}
                 <div className="hidden md:flex space-x-4">
                     <Link
-                        to="/"
+                        to="/home"
                         className="font-bold text-lg md:text-xl hover:scale-110 transition transform duration-300 text-blue-800"
                     >
                         Home
@@ -179,9 +179,10 @@ function Navbar() {
                     >
                         Logout
                     </button>
-                    <button className="text-gray-800 hover:scale-110 transition transform duration-300 focus:outline-none">
-                        <Link to="/login">
+                    <button className="flex items-center justify-center  text-white w-32 h-15 rounded-full bg-red-800 hover:scale-110 transition transform duration-300 focus:outline-none">
+                        <Link to="/" className='text-xl flex items-center gap-3 '>
                             <i className="ri-user-line text-xl"></i>
+                            <h1>Login</h1>  
                         </Link>
                     </button>
                 </div>

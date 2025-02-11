@@ -25,8 +25,8 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
         children: [
-            { path: "/", element: <Home /> },
-            { path: "/login", element: <Login /> },
+            { path: "/home", element: <Home /> },
+            { path: "/", element: <Login /> },
             { path: "/signup", element: <SignUp /> },
             { path: "/category", element: <CategoryPage /> },            
             { path: "/travel-mitra-trips", element: <TravelMitraPlaces /> },
