@@ -15,6 +15,25 @@ const app = express();
 // Port 
 const PORT = process.env.PORT || 5000;
 
+const allowedOrigins = [
+  "", // Frontend deployed
+  "http://localhost:3000", // Local development
+];
+
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow cookies and authorization headers
+    methods: "GET,POST,PUT,DELETE",
+  })
+);
+
 
 
 // app.use(cors(
