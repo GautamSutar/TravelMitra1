@@ -34,14 +34,25 @@ const EventSection = () => {
     <>
       {/* Category Selection and Market List */}
       <div className="chooseCategory mt-10">
-        <h1 className="text-3xl text-center mb-8 font-bold font-lora bg-gradient-to-r from-green-600 to-yellow-800 bg-clip-text text-transparent">Events</h1>
-        <Link to="/calendar" className="text-3xl text-center mb-8 font-bold font-lora bg-gradient-to-r from-green-600 to-yellow-800 bg-clip-text text-transparent">Calendar</Link>
+        <h1 className="text-3xl text-center mb-8 font-bold font-lora bg-gradient-to-r from-green-600 to-yellow-800 bg-clip-text text-transparent">
+          Events
+        </h1>
+        <Link
+          to="/calendar"
+          className="text-3xl text-center mb-8 font-bold font-lora bg-gradient-to-r from-green-600 to-yellow-800 bg-clip-text text-transparent"
+        >
+          Calendar
+        </Link>
       </div>
       <div className="mt-5 bg-white flex flex-col items-center justify-center">
         <div>
-          <EventList eventData={eventData.events || []} loading={loading} />
+          <EventList
+            eventData={eventData.events || []}
+            eventId={eventData.events}
+            loading={loading}
+          />
         </div>
-      </div>  
+      </div>
     </>
   );
 };

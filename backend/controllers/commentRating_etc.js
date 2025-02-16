@@ -1,4 +1,4 @@
-const Places = require('../models/Places');
+const Events = require("../models/Events");
 const User = require('../models/User'); // Adjust the path based on your file structure
 
 
@@ -13,7 +13,7 @@ const addCommentAndRating = async (req, res) => {
         const user = await User.findById(userId);
         if (!user) return res.status(404).json({ message: 'User not found' });
 
-        const place = await Places.findById(placeId);
+        const place = await Events.findById(placeId);
         if (!place) return res.status(404).json({ message: 'Place not found' });
 
         const existingCommentIndex = place.comments.findIndex(
@@ -113,3 +113,6 @@ const deleteCommentRating = async (req, res) => {
 
 
 module.exports = { addCommentAndRating, getPlaceWithComment_Rating, deleteCommentRating };
+
+
+

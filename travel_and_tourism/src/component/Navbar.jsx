@@ -99,7 +99,7 @@ function Navbar() {
                 confirmButtonText: "Okay",
                 confirmButtonColor: '#27ED64',
             });
-            navigate('/login');
+            navigate('/');
         } catch (error) {
             console.error('Logout error:', error);
         }

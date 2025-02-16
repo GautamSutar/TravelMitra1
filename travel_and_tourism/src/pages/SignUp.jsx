@@ -103,7 +103,7 @@ const Signup = () => {
         confirmButtonText: "Okay",
         confirmButtonColor: '#27ED64',
       });
-      navigate('/login');
+      navigate('/');
     } catch (error) {
       Swal.fire({
         icon: "error",
