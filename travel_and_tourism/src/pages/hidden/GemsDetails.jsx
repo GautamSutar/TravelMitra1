@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 const GemsDetails = () => {
     const location = useLocation();
     const [placeDetails, setPlaceDetails] = useState(null);
@@ -10,7 +10,15 @@ const GemsDetails = () => {
 
     const fetchPlaceDetails = async () => {
         try {
-            const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/hidden/detail`, { id: placeId });
+            const response = await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/hidden/detail`,
+              { id: placeId },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             console.log("Place Details:", response.data);
             setPlaceDetails(response.data.place); // Assuming the response has a "place" field with details
         } catch (error) {

@@ -39,12 +39,21 @@ function Navbar() {
         formData.append('profilePicture', file);
 
         try {
-            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/pic/upload-profile-pic`, formData, {
+            await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/pic/upload-profile-pic`,
+              formData,
+              {
                 headers: {
-                    'Content-Type': 'multipart/form-data',
-                    Authorization: `Bearer ${token}`,
+                  "Content-Type": "multipart/form-data",
+                  Authorization: `Bearer ${token}`,
                 },
-            });
+              },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setOpenModal(false);
         } catch (error) {
             console.error("Error uploading profile picture:", error);
@@ -61,11 +70,19 @@ function Navbar() {
         try {
             const token = sessionStorage.getItem('token');
             if (!token) return;
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/pic/displayprofile`, {
+            const response = await axios.get(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/pic/displayprofile`,
+              {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
-            });
+              },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             if (response.data && response.data.profilePicture) {
                 setProfilePictureUrl(response.data.profilePicture);
             }
@@ -85,11 +102,20 @@ function Navbar() {
 
     const handleLogout = async () => {
         try {
-            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/logout`, {}, {
+            await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/auth/logout`,
+              {},
+              {
                 headers: {
-                    Authorization: `Bearer ${token}`,
+                  Authorization: `Bearer ${token}`,
                 },
-            });
+              },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             sessionStorage.removeItem('token');
             // alert('Logged out successfully.');
             Swal.fire({

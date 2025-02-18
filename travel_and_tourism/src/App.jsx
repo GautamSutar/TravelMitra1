@@ -21,7 +21,7 @@ function App() {
   // Hide other components for specific routes
   const hideComponents =
     [
-      "/login",
+      "/",
       "/signup",
       "/category",
       "/planedtrip",

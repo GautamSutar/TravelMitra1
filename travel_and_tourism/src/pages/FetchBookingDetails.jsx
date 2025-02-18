@@ -2,6 +2,7 @@ import React from "react";
 import { jwtDecode } from "jwt-decode"; // Import jwt-decode
 import { useState, useEffect } from "react";
 import axios from "axios";
+axios.defaults.withCredentials = true;
 const FetchBookingDetails = ({ userId }) => {
   const [user, setUser] = useState({ id: "", name: "", email: "" });
   const [error, setError] = useState("");
@@ -40,6 +41,9 @@ const FetchBookingDetails = ({ userId }) => {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
           },
+        },
+        {
+          withCredentials: true, // Ensure this matches the backend setting
         }
       );
 

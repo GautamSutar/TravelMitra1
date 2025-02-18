@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import HotelCard from "../component/HotelCard";
 import axios from "axios";
 import { FaFilter } from "react-icons/fa";
-
+axios.defaults.withCredentials = true;
 const Hotels = () => {
   const [hotels, setHotels] = useState([]);
   const [filteredHotels, setFilteredHotels] = useState([]);
@@ -24,12 +24,20 @@ const Hotels = () => {
           return;
         }
         
-        const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/hotel/getHotel`, {
-          headers: {
-            Authorization: `Bearer ${token}`, // ✅ Correct syntax
-            "Content-Type": "application/json",
+        const response = await axios.get(
+          `${
+            import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+          }/api/hotel/getHotel`,
+          {
+            headers: {
+              Authorization: `Bearer ${token}`, // ✅ Correct syntax
+              "Content-Type": "application/json",
+            },
           },
-        });
+          {
+            withCredentials: true, // Ensure this matches the backend setting
+          }
+        );
         
         console.log("Hotels Data Fetched Successfully:", response.data);
         setHotels(response.data);

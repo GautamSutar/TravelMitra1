@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import EventList from './EventList';
-
+axios.defaults.withCredentials = true;
 const EventSection = () => {
   const [eventData, setEventData] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -12,7 +12,12 @@ const EventSection = () => {
   const fetchData = async() => {
     try {
       setLoading(true);
-      const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/event/getEvent`);
+      const response = await axios.get(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/event/getEvent`,
+        {
+          withCredentials: true, // Ensure this matches the backend setting
+        }
+      );
       console.log("Fetched Data:", response.data); // Check the structure of the response
       setEventData(response.data);
       setLoading(true);

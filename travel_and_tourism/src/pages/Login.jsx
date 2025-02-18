@@ -1,55 +1,66 @@
-import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
-import { Link } from 'react-router-dom';
-import Swal from 'sweetalert2';
-
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+axios.defaults.withCredentials = true;
 const Login = () => {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [message, setMessage] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/login`, {
-        email,
-        password,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/login`,
+        {
+          email,
+          password,
+        },
+        {
+          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // Store JWT token in session storage
       const token = response.data.accessToken;
-      console.log("The Access Token is : ", token) // debuging 
+      console.log("The Access Token is : ", token); // debuging
       if (!token) {
         console.log("🔴 No Token Received from Backend");
         return;
       }
-      // console("The Access Token is : ",token) // debuging 
-      sessionStorage.setItem('token', token); // store in session storage 
-      
+      // console("The Access Token is : ",token) // debuging
+      sessionStorage.setItem("token", token); // store in session storage
+
       Swal.fire({
-        icon: 'success',
-        title: 'Login Successful',
-        text: 'Welcome to Travel Mitra!',
-        confirmButtonText: 'Okay',
-        confirmButtonColor: '#27ED64',
+        icon: "success",
+        title: "Login Successful",
+        text: "Welcome to Travel Mitra!",
+        confirmButtonText: "Okay",
+        confirmButtonColor: "#27ED64",
       });
 
-      setError('');
-      navigate('/home');
+      setError("");
+      navigate("/home");
     } catch (err) {
       Swal.fire({
-        icon: 'error',
-        title: 'Login Failed!',
-        text: `${err.response?.data?.message || 'Server error'}, Please try again`,
-        confirmButtonText: 'Retry',
-        confirmButtonColor: '#FF5733',
+        icon: "error",
+        title: "Login Failed!",
+        text: `${
+          err.response?.data?.message || "Server error"
+        }, Please try again`,
+        confirmButtonText: "Retry",
+        confirmButtonColor: "#FF5733",
       });
-      console.log("Error in login: ",err);
-      setMessage('');
+      console.log("Error in login: ", err);
+      setMessage("");
     }
   };
 
@@ -111,10 +122,7 @@ const Login = () => {
                   />
                 </div>
                 <div className="ml-3 text-sm">
-                  <label
-                    htmlFor="remember"
-                    className="text-gray-900"
-                  >
+                  <label htmlFor="remember" className="text-gray-900">
                     Remember me
                   </label>
                 </div>
@@ -133,7 +141,7 @@ const Login = () => {
               Sign in
             </button>
             <p className="text-center text-sm font-semibold text-gray-700">
-              Don’t have an account yet?{' '}
+              Don’t have an account yet?{" "}
               <Link
                 to="/signup"
                 className="font-medium text-blue-600 hover:underline"
@@ -143,7 +151,9 @@ const Login = () => {
             </p>
           </form>
           {error && <p className="text-red-500 text-center mt-4">{error}</p>}
-          {message && <p className="text-green-500 text-center mt-4">{message}</p>}
+          {message && (
+            <p className="text-green-500 text-center mt-4">{message}</p>
+          )}
         </div>
       </div>
     </section>

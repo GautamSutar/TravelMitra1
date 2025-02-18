@@ -1,14 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 const HiddenGems = () => {
     const [places, setPlaces] = useState([]); // State to store the list of places
     const navigate = useNavigate();
 
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/hidden/getHiddenGems`);
+            const response = await axios.get(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/hidden/getHiddenGems`,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             console.log("Fetched Data:", response.data); // Check the structure of the response
 
             if (response.data.hidden && Array.isArray(response.data.hidden)) {

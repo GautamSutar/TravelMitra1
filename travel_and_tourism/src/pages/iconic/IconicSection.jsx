@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 const IconicSection = () => {
     const [personData, setPersonData] = useState([]);
 
     // Fetch data for a specific type or all places
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/iconic/getPerson`);
+            const response = await axios.get(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/iconic/getPerson`,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             console.log("Fetched Data:", response.data);
             if (Array.isArray(response.data)) {
                 setPersonData(response.data); // Set directly if it's an array

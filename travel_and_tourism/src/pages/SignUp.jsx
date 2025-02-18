@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-
+axios.defaults.withCredentials = true;
 const Signup = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
@@ -36,11 +36,17 @@ const Signup = () => {
 
     if (email) {
       try {
-        const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL }/api/auth/register`, {
-          name,
-          email,
-          password,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/auth/register`,
+          {
+            name,
+            email,
+            password,
+          },
+          {
+            withCredentials: true, // Ensure this matches the backend setting
+          }
+        );
 
         Swal.fire({
           icon: "success",

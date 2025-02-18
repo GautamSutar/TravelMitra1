@@ -5,7 +5,7 @@ import axios from "axios";
 import Swal from 'sweetalert2';
 import "./Booking.css"; // Make sure you have this CSS file for additional styling
 import FetchBookingDetails from "./FetchBookingDetails";
-
+axios.defaults.withCredentials = true;
 const Booking = () => {
   const { hotelId } = useParams();
   const location = useLocation();
@@ -128,6 +128,9 @@ const Booking = () => {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json",
         },
+      },
+      {
+        withCredentials: true, // Ensure this matches the backend setting
       }
     );
   Swal.fire({

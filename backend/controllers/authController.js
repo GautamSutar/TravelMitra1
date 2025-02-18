@@ -167,7 +167,12 @@ const loginUser = async (req, res) => {
         );
 
         console.log("Stored Refresh Token in DB:", savedToken?.refreshToken);
-
+        res.setHeader("Access-Control-Allow-Credentials", "true");
+        res.cookie("refreshToken", refreshToken, {
+          httpOnly: true, // Prevents client-side access
+          secure: true, // Requires HTTPS in production
+          sameSite: "None", // Required for cross-origin requests
+        });
         res.json({ accessToken, refreshToken });
 
     } catch (error) {

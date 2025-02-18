@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Heart, MessageCircle } from "lucide-react"; // Import icon
 import { jwtDecode } from "jwt-decode"; // Import jwt-decode
-
+axios.defaults.withCredentials = true;
 const EventList = ({ eventData = [], loading }) => {
   const defaultImageUrl = "https://via.placeholder.com/150"; // Placeholder image
   const [user, setUser] = useState({ id: "", name: "", email: "" });
@@ -41,7 +41,10 @@ const EventList = ({ eventData = [], loading }) => {
         `${
           import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
         }/api/comment-likes/like/${eventId}`,
-        { userId: user.id }
+        { userId: user.id },
+        {
+          withCredentials: true, // Ensure this matches the backend setting
+        }
       );
 
       setLikes((prevLikes) => ({

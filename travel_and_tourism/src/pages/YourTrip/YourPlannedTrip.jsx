@@ -4,7 +4,7 @@ import { motion } from 'framer-motion';
 import BudgetForm from '../category/BudgetForm';
 import TripSummary from './TripSummary';
 import TripList from './TripList';
-
+axios.defaults.withCredentials = true;
 const YourPlannedTrip = () => {
     const [tripData, setTripData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -29,7 +29,15 @@ const YourPlannedTrip = () => {
     const handleBudgetSubmit = async (budgetAmount) => {
         setBudget(budgetAmount);
         try {
-            const response = await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/budget/yourPlace`, { budget: Number(budgetAmount) });
+            const response = await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/budget/yourPlace`,
+              { budget: Number(budgetAmount) },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setTotalPrice(response.data.totalPrice);
             setSaving(response.data.saving);
             setError('');

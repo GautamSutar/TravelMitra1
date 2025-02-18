@@ -12,7 +12,17 @@ const TravelMitraPlaces = () => {
     const handleBudgetSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post(`${ import.meta.env.VITE_REACT_APP_BACKEND_BASEURL }/api/budget/travelMitra`, { budget });
+            const response = await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/budget/travelMitra`,
+              {
+                budget,
+              },
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setSelectedPlaces(response.data.places);
             setTotalPrice(response.data.totalPrice);
             setError('');
@@ -25,7 +35,15 @@ const TravelMitraPlaces = () => {
 
     const handleAdd = async (place) => {
         try {
-            await axios.post(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/trip/addingTrip`, place);
+            await axios.post(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/trip/addingTrip`,
+              place,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setAddedTrips([...addedTrips, place._id]);
         } catch (error) {
             console.error('Error adding to trip:', error);
@@ -34,7 +52,14 @@ const TravelMitraPlaces = () => {
 
     const handleRemove = async (place) => {
         try {
-            await axios.delete(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/trip/deletingTrip/${place._id}`);
+            await axios.delete(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/trip/deletingTrip/${place._id}`,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setAddedTrips(addedTrips.filter(id => id !== place._id));
         } catch (error) {
             console.error('Error removing from trip:', error);

@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import CalendarView from "./CalendarView";
 import axios from "axios";
-
+axios.defaults.withCredentials = true;
 const EventCalendar = () => {
     const [events, setEvents] = useState([]);
 
     useEffect(() => {
         const fetchEvents = async () => {
             try {
-                const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/event/getEvent`);
+                const response = await axios.get(
+                  `${
+                    import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+                  }/api/event/getEvent`,
+                  {
+                    withCredentials: true, // Ensure this matches the backend setting
+                  }
+                );
                 console.log("Response from backend:", response.data);
                 const events = response.data.events;
 

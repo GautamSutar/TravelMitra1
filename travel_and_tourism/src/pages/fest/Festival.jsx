@@ -1,13 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-
+axios.defaults.withCredentials = true;
 const Festival = () => {
     const [festData, setFestData] = useState([]);
 
     // Fetch data for festivals
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/fest/getFestival`);
+            const response = await axios.get(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/fest/getFestival`,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             console.log("Fetched Data:", response.data);
 
             if (Array.isArray(response.data)) {

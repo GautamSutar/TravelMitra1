@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import CategorySelection from './CategorySelection';
 import MarketList from './MarketList';
 import BudgetModal from '../../component/BudgetModal';
-
+axios.defaults.withCredentials = true;
 const CategoryPage = () => {
     const [marketData, setMarketData] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -26,7 +26,14 @@ const CategoryPage = () => {
     const fetchData = async (type) => {
         try {
             setLoading(true);
-            const response = await axios.get(`${import.meta.env.VITE_REACT_APP_BACKEND_BASEURL}/api/place/searchplace?type=${type}`);
+            const response = await axios.get(
+              `${
+                import.meta.env.VITE_REACT_APP_BACKEND_BASEURL
+              }/api/place/searchplace?type=${type}`,
+              {
+                withCredentials: true, // Ensure this matches the backend setting
+              }
+            );
             setMarketData(response.data);
             setLoading(false);
         } catch (error) {
