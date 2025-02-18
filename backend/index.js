@@ -16,7 +16,7 @@ const mainRouter = require("./routes/AllRoutes"); // Route
 const PORT = process.env.PORT || 5000;
 
 // const allowedOrigins = ["http://localhost:5173"]; // Add the specific origins you want to allow
-const allowedOrigins = ["https://travel-mitra1-kw8x.vercel.app/"];
+const allowedOrigins = ["https://travel-mitra1-kw8x.vercel.app"];
 
 app.use(
   cors({
