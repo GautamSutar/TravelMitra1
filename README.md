@@ -1,4 +1,3 @@
-```markdown
 # 🌍✨ **TravelMitra**
 
 **🚀 Live Project:** [TravelMitra](https://travel-mitra1-kw8x.vercel.app/)  
